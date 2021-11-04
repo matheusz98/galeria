@@ -5,7 +5,7 @@ import UploadForm from "./components/UploadForm/UploadForm";
 import Gallery from "./components/Gallery/Gallery";
 
 const Container = styled.section`
-  max-width: 960px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 0 16px;
 `;

@@ -3,6 +3,8 @@ import GlobalStyle from "./globalStyles";
 import styled from "styled-components";
 import UploadForm from "./components/UploadForm/UploadForm";
 import Gallery from "./components/Gallery/Gallery";
+import Modal from "./components/Modal/Modal";
+import { useState } from "react";
 
 const Container = styled.section`
   max-width: 1100px;
@@ -11,13 +13,18 @@ const Container = styled.section`
 `;
 
 const App = () => {
+  const [selectedImg, setSelectedImg] = useState(null);
+
   return (
     <>
       <GlobalStyle />
       <Container>
         <Title />
         <UploadForm />
-        <Gallery />
+        <Gallery setSelectedImg={setSelectedImg} />
+        {selectedImg && (
+          <Modal selectedImg={selectedImg} setSelectedImg={setSelectedImg} />
+        )}
       </Container>
     </>
   );

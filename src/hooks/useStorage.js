@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
-import { projectStorage } from "../services/Firebase";
+import {
+  projectStorage,
+  projectFirestore,
+  timestamp,
+} from "../services/Firebase";
 
 // Hook para armazenar fotos
-export const useStorage = (file) => {
+const useStorage = (file) => {
   // Barra de progresso do envio
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState("");
@@ -10,6 +14,8 @@ export const useStorage = (file) => {
 
   useEffect(() => {
     const storageRef = projectStorage.ref(file.name);
+    const collectionRef = projectFirestore.collection("images");
+
     storageRef.put(file).on(
       "state_changed",
       (snap) => {
@@ -21,7 +27,9 @@ export const useStorage = (file) => {
         setError(err);
       },
       async () => {
-        const url = await storageRef.getDownloadUrl();
+        const url = await storageRef.getDownloadURL();
+        const createdAt = timestamp();
+        collectionRef.add({ url, createdAt });
         setUrl(url);
       }
     );
@@ -29,3 +37,5 @@ export const useStorage = (file) => {
 
   return { progress, url, error };
 };
+
+export default useStorage;

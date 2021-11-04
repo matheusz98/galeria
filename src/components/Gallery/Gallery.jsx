@@ -1,5 +1,11 @@
 import useFirestore from "../../hooks/useFirestore";
-import { GalleryGrid, GalleryContent, Image } from "./GalleryStyle";
+import {
+  GalleryGrid,
+  GalleryContent,
+  Image,
+  Icons,
+  ViewIcon,
+} from "./GalleryStyle";
 
 const Gallery = ({ setSelectedImg }) => {
   const { docs } = useFirestore("images");
@@ -10,6 +16,9 @@ const Gallery = ({ setSelectedImg }) => {
         docs.map((doc) => (
           <GalleryContent key={doc.id} onClick={() => setSelectedImg(doc.url)}>
             <Image src={doc.url} alt="Imagem" />
+            <Icons>
+              <ViewIcon />
+            </Icons>
           </GalleryContent>
         ))}
     </GalleryGrid>

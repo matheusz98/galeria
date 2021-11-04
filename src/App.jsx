@@ -2,6 +2,7 @@ import Title from "./components/Title/Title";
 import GlobalStyle from "./globalStyles";
 import styled from "styled-components";
 import UploadForm from "./components/UploadForm/UploadForm";
+import Gallery from "./components/Gallery/Gallery";
 
 const Container = styled.section`
   max-width: 960px;
@@ -16,6 +17,7 @@ const App = () => {
       <Container>
         <Title />
         <UploadForm />
+        <Gallery />
       </Container>
     </>
   );
